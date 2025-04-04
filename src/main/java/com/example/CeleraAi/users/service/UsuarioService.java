@@ -55,7 +55,7 @@ public class UsuarioService {
                 .phoneNumber(postCrearUserDto.phoneNumber())
                 .birthDate(postCrearUserDto.nacimiento())
                 .roles(EnumSet.of(UserRoles.USER))
-                .enabled(false)
+                .enabled(true)
                 .build();
 
         return usuarioRepo.save(usuario);
