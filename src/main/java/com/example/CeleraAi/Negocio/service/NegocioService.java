@@ -67,7 +67,7 @@ public class NegocioService {
             String nombre= ((UserDetails)principal).getUsername();
             Optional<Usuario> usuario = usuarioRepo.findByEmailIgnoreCase(nombre);
             if (usuario.isPresent()){
-                List<Negocio> negocios = negocioRepo.findAll();
+                List<Negocio> negocios = usuario.get().getNegocios();
                 List<NegocioDto> negocioDtos = negocios.stream().map(NegocioDto::of).collect(Collectors.toList());
                 return negocioDtos;
             }
