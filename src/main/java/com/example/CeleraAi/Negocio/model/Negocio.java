@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Builder
-@ToString(exclude = {"facturas", "prodcutos", "ventas"})
+@ToString(exclude = {"facturas", "prodcutos", "ventas","categorias","usuario"})
 
 public class Negocio {
 
