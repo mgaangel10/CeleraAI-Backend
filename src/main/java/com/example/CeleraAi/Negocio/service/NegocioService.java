@@ -52,6 +52,7 @@ public class NegocioService {
                 negocio.setSitioweb(crearNegocioDto.sitioweb());
                 negocioRepo.save(negocio);
                 usuario.get().getNegocios().add(negocio);
+                usuarioRepo.save(usuario.get());
                 categorias.get().getNegocios().add(negocio);
                 return NegocioDto.of(negocio);
             }
