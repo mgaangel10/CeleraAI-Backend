@@ -48,6 +48,7 @@ public class ProductoService {
                 prodcuto.setPrecio(crearProductoDto.precio());
                 prodcuto.setStock(crearProductoDto.stock());
                 prodcuto.setDisponible(true);
+                prodcuto.setFechaCrecaion(LocalDate.now());
                 prodcuto.setPrecioProveedor(crearProductoDto.precioProveedor());
                 prodcuto.setNegocio(negocio.get());
 
@@ -92,6 +93,7 @@ public class ProductoService {
 
                         producto.setNegocio(negocioOpt.get());
                         producto.setDisponible(true);
+                        producto.setFechaCrecaion(LocalDate.now());
                         productoRepo.save(producto);
 
                         negocioOpt.get().getProdcutos().add(producto);
@@ -187,10 +189,10 @@ public class ProductoService {
             Optional<Usuario> usuario = usuarioRepo.findByEmailIgnoreCase(nombre);
 
             if (usuario.isPresent()){
-               Optional<Negocio> negocio = negocioRepo.findById(idNegocio);
-               List<Producto> prodcutos = negocio.get().getProdcutos().stream().filter(prodcuto -> prodcuto.getStock()<15 && prodcuto.isDisponible()).collect(Collectors.toList());
-               List<ProductoDto> productoDtos = prodcutos.stream().map(ProductoDto::of).collect(Collectors.toList());
-               return productoDtos;
+                Optional<Negocio> negocio = negocioRepo.findById(idNegocio);
+                List<Producto> prodcutos = negocio.get().getProdcutos().stream().filter(prodcuto -> prodcuto.getStock()<15 && prodcuto.isDisponible()).collect(Collectors.toList());
+                List<ProductoDto> productoDtos = prodcutos.stream().map(ProductoDto::of).collect(Collectors.toList());
+                return productoDtos;
             }
         }
 

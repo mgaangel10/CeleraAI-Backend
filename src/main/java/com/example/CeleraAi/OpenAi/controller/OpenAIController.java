@@ -11,10 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,15 +23,17 @@ public class OpenAIController {
     private final OpenAIService openAIService;
     private final RecomendacionesService recomendacionesService;
 
-    @PostMapping("usuario/generarTexto")
-    public String generarTexto(@RequestBody String mensajeUsuario) {
-        return openAIService.generarTextoConIA(mensajeUsuario);
-    }
+
 
     @PostMapping("usuario/generarRecomendaciones/{id}")
     public ResponseEntity<String> generarRecomendaciones(@RequestBody PreguntaUsuarioDto preguntaUSuario, @PathVariable UUID id) throws JsonProcessingException {
-        String resultado = openAIService.generarRecomendaciones(preguntaUSuario,id);
+        String resultado = openAIService.generarRecomendacionConIA(preguntaUSuario,id);
         return ResponseEntity.ok(resultado);
     }
 
+    @GetMapping("usuario/alertas/{id}")
+    public ResponseEntity<List<String>> alertas(@PathVariable UUID id){
+        List<String> alertas = openAIService.generarAlertas(id);
+        return ResponseEntity.ok(alertas);
+    }
 }
