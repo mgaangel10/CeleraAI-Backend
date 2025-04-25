@@ -31,6 +31,13 @@ public class OpenAIController {
         return openAIService.generarTextoConIA(mensajeUsuario);
     }
 
+    @PostMapping("usuario/ia/spring")
+    public ResponseEntity<String> recibirDesdePython(@RequestBody String mensajeUsuario) {
+        String respuesta = openAIService.generarTextoConIA(mensajeUsuario);
+        return ResponseEntity.ok(respuesta);
+    }
+
+
     @PostMapping("usuario/generarRecomendaciones/{id}")
     public ResponseEntity<String> generarRecomendaciones(@RequestBody PreguntaUsuarioDto preguntaUSuario, @PathVariable UUID id) throws JsonProcessingException {
         String resultado = openAIService.generarRecomendaciones(preguntaUSuario,id);

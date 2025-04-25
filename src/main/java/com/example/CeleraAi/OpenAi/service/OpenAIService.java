@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 public class OpenAIService {
 
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
-    private static final String API_KEY = "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"; // ¡Recuerda nunca compartir tu API key!
+    private static final String API_KEY = "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"; // ¡Recuerda nunca compartir tu API key!
     private final UsuarioRepo usuarioRepo;
     private final VentaService ventaService;
     private final NegocioRepo negocioRepo;
