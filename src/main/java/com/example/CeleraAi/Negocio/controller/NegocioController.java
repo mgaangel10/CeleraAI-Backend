@@ -2,6 +2,7 @@ package com.example.CeleraAi.Negocio.controller;
 
 import com.example.CeleraAi.Negocio.Dto.CrearNegocioDto;
 import com.example.CeleraAi.Negocio.Dto.NegocioDto;
+import com.example.CeleraAi.Negocio.Dto.ResumenNegocioDto;
 import com.example.CeleraAi.Negocio.service.NegocioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class NegocioController {
     @GetMapping("usuario/negocio/{id}")
     public ResponseEntity<NegocioDto> negocioId(@PathVariable UUID id){
         NegocioDto negocioDto = negocioService.findById(id);
+        return ResponseEntity.ok(negocioDto);
+    }
+    @GetMapping("usuario/resumen/diario/{id}")
+    public ResponseEntity<ResumenNegocioDto> resumenDIario(@PathVariable UUID id){
+        ResumenNegocioDto negocioDto = negocioService.obtenerResumenDiario(id);
         return ResponseEntity.ok(negocioDto);
     }
 }
