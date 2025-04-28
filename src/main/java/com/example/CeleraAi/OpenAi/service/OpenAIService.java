@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class OpenAIService {
-
+//url
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
     private final UsuarioRepo usuarioRepo;
