@@ -25,8 +25,11 @@ public class OpenAIController {
 
 
 
+
+
+
     @PostMapping("usuario/generarRecomendaciones/{id}")
-    public ResponseEntity<String> generarRecomendaciones(@RequestBody PreguntaUsuarioDto preguntaUSuario, @PathVariable UUID id) throws JsonProcessingException {
+    public ResponseEntity<String> generarRecomendacionConIA(@RequestBody PreguntaUsuarioDto preguntaUSuario, @PathVariable UUID id) throws JsonProcessingException {
         String resultado = openAIService.generarRecomendacionConIA(preguntaUSuario,id);
         return ResponseEntity.ok(resultado);
     }

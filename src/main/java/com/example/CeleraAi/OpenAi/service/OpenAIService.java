@@ -38,8 +38,14 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class OpenAIService {
+
 //url
-    private static final String API_URL = "https://api.openai.com/v1/chat/completions";
+    
+    @Value("${openai.api.url}")
+    private  String API_URL;
+
+
+
 
     private final UsuarioRepo usuarioRepo;
     private final VentaService ventaService;
