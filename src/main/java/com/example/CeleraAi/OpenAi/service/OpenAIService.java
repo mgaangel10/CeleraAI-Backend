@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class OpenAIService {
 
 //url
-    
+
     @Value("${openai.api.url}")
     private  String API_URL;
 
