@@ -4,6 +4,7 @@ import com.example.CeleraAi.Producto.Dto.ProductoDto;
 import com.example.CeleraAi.Venta.Dto.CrearVentaDto;
 import com.example.CeleraAi.Venta.Dto.FiltrarVentaPorFechaDTo;
 import com.example.CeleraAi.Venta.Dto.VentaDto;
+import com.example.CeleraAi.Venta.Dto.VentasPorFechaDTO;
 import com.example.CeleraAi.Venta.model.Venta;
 import com.example.CeleraAi.Venta.service.VentaService;
 import lombok.RequiredArgsConstructor;
@@ -159,6 +160,17 @@ public class VentaController {
         return ResponseEntity.ok(ventaDtos);
     }
 
+    @GetMapping("usuario/ventas/hoy/{id}")
+    public ResponseEntity<List<VentaDto>> verVentasHoy(@PathVariable UUID id){
+        List<VentaDto> ventaDtos = ventaService.verVentasHoy(id);
+        return ResponseEntity.ok(ventaDtos);
+    }
+
+    @GetMapping("usuario/historico/ventas/{id}")
+    public ResponseEntity<List<VentasPorFechaDTO>> historicoVentas(@PathVariable UUID id){
+        List<VentasPorFechaDTO> ventasPorFechaDTOS = ventaService.historicoVentas(id);
+        return ResponseEntity.ok(ventasPorFechaDTOS);
+    }
 
 
 

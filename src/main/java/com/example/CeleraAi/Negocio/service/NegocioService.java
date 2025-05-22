@@ -59,6 +59,7 @@ public class NegocioService {
                 negocio.setPais(crearNegocioDto.pais());
                 negocio.setCiudad(crearNegocioDto.ciudad());
                 negocio.setUsuario(usuario.get());
+                negocio.setCid(crearNegocioDto.cid());
                 negocio.setSitioweb(crearNegocioDto.sitioweb());
                 negocioRepo.save(negocio);
                 usuario.get().getNegocios().add(negocio);
