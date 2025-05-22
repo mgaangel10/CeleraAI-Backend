@@ -41,8 +41,7 @@ public class OpenAIService {
    // @Value("${openai.api.url}")
     //private  String API_URL;
 
-    private static final String API_KEY = "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"; // ¡Recuerda nunca compartir tu API key!
-    private static final String API_URL = "https://api.openai.com/v1/chat/completions";
+
     private final UsuarioRepo usuarioRepo;
     private final VentaService ventaService;
     private final VentaRepo ventaRepo;
