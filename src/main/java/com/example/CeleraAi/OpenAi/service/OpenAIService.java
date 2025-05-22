@@ -39,7 +39,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OpenAIService {
 
-//url
+   // @Value("${openai.api.url}")
+    //private  String API_URL;
+
+
+
     
     @Value("${openai.api.url}")
     private  String API_URL;
@@ -53,8 +57,7 @@ public class OpenAIService {
     private final NegocioRepo negocioRepo;
     private final ProductoRepo productoRepo;
     private final RegistroAccionIARepo registroAccionIARepo;
-    @Value("${openai.api.key}")
-    private String API_KEY;
+  
 
     private final Map<UUID, List<MensajeIA>> historialPorUsuario = new HashMap<>();
     private final Map<UUID, AccionIA> ultimaSugerenciaPendiente = new HashMap<>();

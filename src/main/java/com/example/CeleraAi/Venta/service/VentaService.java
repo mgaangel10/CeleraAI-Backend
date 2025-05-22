@@ -7,10 +7,7 @@ import com.example.CeleraAi.Negocio.model.Negocio;
 import com.example.CeleraAi.Negocio.repositorio.NegocioRepo;
 import com.example.CeleraAi.Producto.model.Producto;
 import com.example.CeleraAi.Producto.repositorio.ProductoRepo;
-import com.example.CeleraAi.Venta.Dto.CrearVentaDto;
-import com.example.CeleraAi.Venta.Dto.DetalleVentaDTo;
-import com.example.CeleraAi.Venta.Dto.FiltrarVentaPorFechaDTo;
-import com.example.CeleraAi.Venta.Dto.VentaDto;
+import com.example.CeleraAi.Venta.Dto.*;
 import com.example.CeleraAi.Venta.model.DetalleVenta;
 import com.example.CeleraAi.Venta.model.Venta;
 import com.example.CeleraAi.Venta.repositorio.DetalleVentaRepo;
@@ -24,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.*;
@@ -270,6 +268,41 @@ public class VentaService {
         return null;
     }
 
+
+    public List<VentaDto> verVentasHoy(UUID idNegocio){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            String nombre= ((UserDetails)principal).getUsername();
+            Optional<Usuario> usuario = usuarioRepo.findByEmailIgnoreCase(nombre);
+            Optional<Negocio> negocio = negocioRepo.findById(idNegocio);
+            if (usuario.isPresent()){
+            List<Venta> ventas = negocio.get().getVentas();
+            List<Venta> ventas1 = ventas.stream().filter(venta -> venta.getFecha().isEqual(LocalDate.now())).collect(Collectors.toList());
+            List<VentaDto> ventaDtos = ventas1.stream().map(VentaDto::of).collect(Collectors.toList());
+                return ventaDtos;
+            }
+        }
+
+        return null;
+    }
+    public List<VentasPorFechaDTO> historicoVentas(UUID id) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        Optional<Negocio> negocio = negocioRepo.findById(id);
+
+        return negocio.get().getVentas().stream()
+                .map(venta -> VentaDto.of(venta))
+                .collect(Collectors.groupingBy(
+                        ventaDto -> ventaDto.fecha().format(formatter),
+                        LinkedHashMap::new,
+                        Collectors.toList()
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> VentasPorFechaDTO.of(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
     public double obtenerTotalVentasDelDia(LocalDate fecha) {
         return ventaRepo.calcularTotalVentasDelDia(fecha);
     }
