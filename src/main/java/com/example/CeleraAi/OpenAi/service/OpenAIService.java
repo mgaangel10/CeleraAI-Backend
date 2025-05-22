@@ -40,9 +40,10 @@ import java.util.stream.Collectors;
 public class OpenAIService {
 
 
-    @Value("${openai.api.key}")
-    private static String API_KEY;
+  @Value("${openai.api.key}")
+  private  String API_KEY;
 
+   // private static final String API_KEY = "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";
 
 
 
@@ -51,8 +52,8 @@ public class OpenAIService {
     
 
     @Value("${openai.api.url}")
-    private  static String API_URL;
-
+    private   String API_URL;
+   // private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
 
 
