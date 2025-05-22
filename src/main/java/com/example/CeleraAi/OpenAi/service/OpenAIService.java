@@ -40,9 +40,8 @@ import java.util.stream.Collectors;
 public class OpenAIService {
 
 
-   @Value("${openai.api.key}")
-   private String API_KEY;
-    //private  String API_URL;
+    @Value("${openai.api.key}")
+    private static String API_KEY;
 
 
 
@@ -52,7 +51,7 @@ public class OpenAIService {
     
 
     @Value("${openai.api.url}")
-    private  String API_URL;
+    private  static String API_URL;
 
 
 
